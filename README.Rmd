@@ -6,6 +6,7 @@ output: github_document
 
 ```{r, include = FALSE}
 library("chatgpt")
+library("clipr")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -87,6 +88,22 @@ examples_usage <- sapply(exported_functions, function(exported_function) {
   )
 })
 cat(paste0("\n", examples_usage, collapse = "\n\n"))
+```
+
+## Use Code from Clipboard
+
+You can copy a code snippet to clipboard and use {chatgpt} functions without supplying the `code` argument.
+
+```{r results='asis'}
+clipr::write_clip("summarise_data <- function(data) {
+  summary_stats <- summary(data)
+  return(summary_stats)
+}",
+allow_non_interactive = TRUE)
+
+expl <- chatgpt::explain_code()
+
+cat(expl)
 ```
 
 ## Additional Parameters

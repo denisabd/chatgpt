@@ -17,7 +17,7 @@
 create_variable_name <- function(code = NULL) {
 
   if (is.null(code)) {
-    code <- read_clip()
+    code <- read_clip(allow_non_interactive = TRUE)
   }
 
   if (is.null(code)) {
