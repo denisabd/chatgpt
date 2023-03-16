@@ -2,6 +2,9 @@
 #'
 #' @param code The code for which to give a variable name to its result.
 #'
+#' @importFrom clipr read_clip
+#' @importFrom stringr str_replace_all
+#'
 #' @examples
 #' \dontrun{
 #' cat(create_variable_name("sapply(1:10, function(i) i ** 2)"))
@@ -11,7 +14,18 @@
 #'
 #' @export
 #'
-create_variable_name <- function(code) {
+create_variable_name <- function(code = NULL) {
+
+  if (is.null(code)) {
+    code <- read_clip()
+  }
+
+  if (is.null(code)) {
+    stop("Add your code as an argument of copy code to clipboard")
+  } else {
+    code <- paste(str_replace_all(code, "\"", "'"), collapse = "\n")
+  }
+
   prompt <- paste0('Give a good variable name to the result of the following R code: "', code, '"')
   parse_response(gpt_get_completions(prompt))
 }

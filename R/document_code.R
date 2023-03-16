@@ -2,6 +2,9 @@
 #'
 #' @param code The code to be documented by ChatGPT.
 #'
+#' @importFrom clipr read_clip
+#' @importFrom stringr str_replace_all
+#'
 #' @examples
 #' \dontrun{
 #' cat(document_code("square_numbers <- function(numbers) numbers ** 2"))
@@ -11,7 +14,18 @@
 #'
 #' @export
 #'
-document_code <- function(code) {
+document_code <- function(code = NULL) {
+
+  if (is.null(code)) {
+    code <- read_clip()
+  }
+
+  if (is.null(code)) {
+    stop("Add your code as an argument of copy code to clipboard")
+  } else {
+    code <- paste(str_replace_all(code, "\"", "'"), collapse = "\n")
+  }
+
   prompt <- paste0('Document, in roxygen2 format, this R function: "', code, '"')
   parse_response(gpt_get_completions(prompt))
 }

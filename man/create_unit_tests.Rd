@@ -4,7 +4,7 @@
 \alias{create_unit_tests}
 \title{ChatGPT: Create Unit Tests}
 \usage{
-create_unit_tests(code)
+create_unit_tests(code = NULL)
 }
 \arguments{
 \item{code}{The code for which to create unit tests by ChatGPT.}

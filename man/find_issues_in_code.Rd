@@ -4,7 +4,7 @@
 \alias{find_issues_in_code}
 \title{ChatGPT: Find Issues in Code}
 \usage{
-find_issues_in_code(code)
+find_issues_in_code(code = NULL)
 }
 \arguments{
 \item{code}{The code to be analyzed by ChatGPT.}

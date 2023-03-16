@@ -4,7 +4,7 @@
 \alias{refactor_code}
 \title{ChatGPT: Refactor Code}
 \usage{
-refactor_code(code)
+refactor_code(code = NULL)
 }
 \arguments{
 \item{code}{The code to be refactored by ChatGPT.}

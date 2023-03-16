@@ -2,6 +2,9 @@
 #'
 #' @param code The code to be explained by ChatGPT.
 #'
+#' @importFrom clipr read_clip
+#' @importFrom stringr str_replace_all
+#'
 #' @examples
 #' \dontrun{
 #' cat(explain_code("for (i in 1:10) {\n  print(i ** 2)\n}"))
@@ -11,7 +14,18 @@
 #'
 #' @export
 #'
-explain_code <- function(code) {
+explain_code <- function(code = NULL) {
+
+  if (is.null(code)) {
+    code <- read_clip()
+  }
+
+  if (is.null(code)) {
+    stop("Add your code as an argument of copy code to clipboard")
+  } else {
+    code <- paste(str_replace_all(code, "\"", "'"), collapse = "\n")
+  }
+
   prompt <- paste0('Explain the following R code: "', code, '"')
   parse_response(gpt_get_completions(prompt))
 }

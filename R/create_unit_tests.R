@@ -4,6 +4,9 @@
 #'
 #' @param code The code for which to create unit tests by ChatGPT.
 #'
+#' @importFrom clipr read_clip
+#' @importFrom stringr str_replace_all
+#'
 #' @examples
 #' \dontrun{
 #' cat(create_unit_tests("squared_numbers <- function(numbers) {\n  numbers ^ 2\n}"))
@@ -13,7 +16,18 @@
 #'
 #' @export
 #'
-create_unit_tests <- function(code) {
+create_unit_tests <- function(code = NULL) {
+
+  if (is.null(code)) {
+    code <- read_clip()
+  }
+
+  if (is.null(code)) {
+    stop("Add your code as an argument of copy code to clipboard")
+  } else {
+    code <- paste(str_replace_all(code, "\"", "'"), collapse = "\n")
+  }
+
   prompt <- paste0(
     'Create a full testthat file, with test cases for the following R code: "', code, '"'
   )

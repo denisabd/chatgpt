@@ -2,6 +2,9 @@
 #'
 #' @param code The code to be analyzed by ChatGPT.
 #'
+#' @importFrom clipr read_clip
+#' @importFrom stringr str_replace_all
+#'
 #' @examples
 #' \dontrun{
 #' cat(find_issues_in_code("i <- 0\nwhile (i < 0) {\n  i <- i - 1\n}"))
@@ -11,7 +14,18 @@
 #'
 #' @export
 #'
-find_issues_in_code <- function(code) {
+find_issues_in_code <- function(code = NULL) {
+
+  if (is.null(code)) {
+    code <- read_clip()
+  }
+
+  if (is.null(code)) {
+    stop("Add your code as an argument of copy code to clipboard")
+  } else {
+    code <- paste(str_replace_all(code, "\"", "'"), collapse = "\n")
+  }
+
   prompt <- paste0('Find issues or bugs in the following R code: "', code, '"')
   parse_response(gpt_get_completions(prompt))
 }

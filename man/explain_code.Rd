@@ -4,7 +4,7 @@
 \alias{explain_code}
 \title{ChatGPT: Explain Code}
 \usage{
-explain_code(code)
+explain_code(code = NULL)
 }
 \arguments{
 \item{code}{The code to be explained by ChatGPT.}

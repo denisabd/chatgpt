@@ -4,7 +4,7 @@
 \alias{comment_code}
 \title{ChatGPT: Comment Code}
 \usage{
-comment_code(code)
+comment_code(code = NULL)
 }
 \arguments{
 \item{code}{The code to be commented by ChatGPT.}

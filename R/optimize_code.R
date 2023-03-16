@@ -2,6 +2,9 @@
 #'
 #' @param code The code to be optimized by ChatGPT.
 #'
+#' @importFrom clipr read_clip
+#' @importFrom stringr str_replace_all
+#'
 #' @examples
 #' \dontrun{
 #' cat(optimize_code("i <- 10\nwhile (i > 0) {\n  i <- i - 1\n  print(i)\n}"))
@@ -11,7 +14,18 @@
 #'
 #' @export
 #'
-optimize_code <- function(code) {
+optimize_code <- function(code = NULL) {
+
+  if (is.null(code)) {
+    code <- read_clip()
+  }
+
+  if (is.null(code)) {
+    stop("Add your code as an argument of copy code to clipboard")
+  } else {
+    code <- paste(str_replace_all(code, "\"", "'"), collapse = "\n")
+  }
+
   prompt <- paste0('Optimize the following R code: "', code, '"')
   parse_response(gpt_get_completions(prompt))
 }

@@ -4,7 +4,7 @@
 \alias{document_code}
 \title{ChatGPT: Document Code (in roxygen2 format)}
 \usage{
-document_code(code)
+document_code(code = NULL)
 }
 \arguments{
 \item{code}{The code to be documented by ChatGPT.}

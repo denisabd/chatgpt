@@ -4,7 +4,7 @@
 \alias{create_variable_name}
 \title{ChatGPT: Create Variable Name}
 \usage{
-create_variable_name(code)
+create_variable_name(code = NULL)
 }
 \arguments{
 \item{code}{The code for which to give a variable name to its result.}

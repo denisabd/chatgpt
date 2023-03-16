@@ -4,7 +4,7 @@
 \alias{optimize_code}
 \title{ChatGPT: Optimize Code}
 \usage{
-optimize_code(code)
+optimize_code(code = NULL)
 }
 \arguments{
 \item{code}{The code to be optimized by ChatGPT.}
